@@ -4,7 +4,8 @@ from pathlib import Path
 from datetime import date, datetime
 
 parser = argparse.ArgumentParser()
-parser.add_argument('entry', type=str, help='add entry to devlog file')
+parser.add_argument('entry', nargs='?', type=str, help='Add entry to devlog file')
+parser.add_argument('-v', '--view', action='store_true', help='View all past logs')
 args = parser.parse_args()
 
 with open('config.json', 'r') as f:
@@ -12,6 +13,7 @@ with open('config.json', 'r') as f:
 
 DATE_FORMAT = config['date-format']
 TIME_FORMAT = config['time-format']
+LOG_FILE = config['default-log-file']
 
 def add_entry(file: str, entry: str):
   today_date = date.today().strftime(DATE_FORMAT)
@@ -20,7 +22,7 @@ def add_entry(file: str, entry: str):
 
   if not file_path.exists():
     with file_path.open('w') as f:
-      f.write(f'{today_date}\n - ({now_time})\n    {entry}\n')
+      f.write(f'{today_date}\n - ({now_time})\n      {entry}\n\n')
     return
 
   with file_path.open('r') as f:
@@ -28,11 +30,16 @@ def add_entry(file: str, entry: str):
 
   if any(line.strip() == today_date for line in lines):
     with file_path.open('a') as f:
-      f.write(f'- ({now_time})\n    {entry}\n')
+      f.write(f' - ({now_time})\n      {entry}\n\n')
   else:
     with file_path.open('a') as f:
-      f.write(f'{today_date}\n - ({now_time})\n    {entry}\n')
+      f.write(f'{today_date}\n - ({now_time})\n      {entry}\n\n')
 
 
 if __name__ == "__main__":
-  add_entry('devlog.txt', args.entry)
+  if args.entry:
+    add_entry(LOG_FILE, args.entry)
+
+  if args.view:
+    with open(LOG_FILE, 'r') as f:
+      print(f.read())
