@@ -71,7 +71,7 @@ Prints the entire devlog.txt content to the terminal.
 
 ---
 
-## Future Ideas (Optional)
+## Future Ideas
 
 - Write logs to Markdown format for better formatting.
 - Auto-push logs to GitHub for backup.
