@@ -28,8 +28,57 @@ Create a `config.json` file in the project root with the following structure:
 
 ```json
 {
+  "default-log-file": "devlog.txt",
   "date-format": "%Y-%m-%d",
-  "time-format": "%H:%M",
-  "default-log-file": "devlog.txt"
+  "time-format": "%H:%M"
 }
 ```
+
+---
+
+## Usage
+
+1. Add a New Entry
+
+```bash
+python devlog.py "Fixed a bug in the authentication module"
+
+```
+
+Automatically adds under today's date in your log file.
+
+2. View All Logs
+
+```bash
+python devlog.py --view
+```
+
+Prints the entire devlog.txt content to the terminal.
+
+---
+
+## Example Log Output
+
+```markdown
+2025-08-25
+
+- (14:30)
+  Fixed a bug in authentication module
+
+- (16:45)
+  Improved logging system
+```
+
+---
+
+## Future Ideas (Optional)
+
+- Write logs to Markdown format for better formatting.
+- Auto-push logs to GitHub for backup.
+- Support editing/deleting specific entries.
+
+---
+
+## License
+
+This project is open-source. Use it and modify it freely.
