@@ -1,5 +1,5 @@
 {
   "default-log-file": "devlog.txt",
   "date-format": "%d-%m-%Y",
-  "time-format": "%I:%M:%S %p"
+  "time-format": "%H:%M"
 }
